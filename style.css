@@ -1,0 +1,49 @@
+/* ----------------------------------------------------------
+   Reset
+   ------------------------------------------------------- */
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* ----------------------------------------------------------
+   Layout
+   ------------------------------------------------------- */
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  color: #000;
+  background: #fff;
+}
+
+main {
+  user-select: none;
+  height: 100vh;
+  height: 100svh;
+}
+
+main p {
+  place-items: center;
+  margin: 0;
+  height: 100%;
+}
+
+/* ----------------------------------------------------------
+   Steps
+   ------------------------------------------------------- */
+
+.step {
+  display: none;
+}
+
+body[data-active-step="0"] .step[data-step="0"],
+body[data-active-step="1"] .step[data-step="1"],
+body[data-active-step="2"] .step[data-step="2"] {
+  display: grid;
+}
