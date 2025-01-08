@@ -18,7 +18,7 @@ html {
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  color: #000;
+  color: #fff;
   background: #fff;
 }
 
@@ -28,16 +28,32 @@ main {
   height: 100svh;
 }
 
-main p {
-  place-items: center;
-  margin: 0;
-  height: 100%;
-}
-
 /* ----------------------------------------------------------
    Steps
    ------------------------------------------------------- */
 
+.step {
+  place-items: center;
+  margin: 0;
+  height: 100%;
+  font-size: 6rem;
+  font-weight: 700;
+}
+
 .step:not([hidden]) {
   display: grid;
+}
+
+.step.step--0 {
+  background: rgba(13, 110, 253, .7);
+}
+
+.step.step--1 {
+  background: rgba(255, 193, 7, .7);
+  color: #000;
+}
+
+.step.step--2 {
+  background: rgba(25, 135, 84, .7);
+  color: #fff;
 }
