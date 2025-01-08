@@ -13,10 +13,10 @@ document.addEventListener('click', ({ target }) => {
  */
 
 function updateStape (step) {
-  const stepsElements = document.querySelectorAll('[data-step]')
+  const stepsElements = document.querySelectorAll('.js-step')
   activeStep = step === stepsElements.length ? 0 : step
 
-  const hiddenStep = document.querySelector('[data-step]:not([hidden])')
+  const hiddenStep = document.querySelector('.js-step:not([hidden])')
   hiddenStep.hidden = true
 
   const stepElementToDisplay = stepsElements[activeStep]
