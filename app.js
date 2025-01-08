@@ -3,19 +3,19 @@
 /** @type {number} */
 let activeStep = 0
 
-/** @type {HTMLAllCollection} */
+/** @type {NodeListOf<Element>} */
 const stepsElements = document.querySelectorAll('.js-step')
 
 document.addEventListener('click', ({ target }) => {
-  updateStape(activeStep + 1)
+  updateStep(activeStep + 1)
 })
 
 /**
- * Update state
- * @param {Number} step - to go
+ * Updates the active step state and handles the display of steps.
+ *
+ * @param {number} step - The next step index to activate.
  */
-
-function updateStape (step) {
+const updateStep = (step) => {
   activeStep = step === stepsElements.length ? 0 : step
 
   const hiddenStep = document.querySelector('.js-step:not([hidden])')
@@ -28,9 +28,7 @@ function updateStape (step) {
     countDown({
       seconds: 10,
       element: stepElementToDisplay,
-      callback: function () {
-        updateStape(2)
-      }
+      callback: () => updateStep(2)
     })
   }
 
@@ -38,9 +36,7 @@ function updateStape (step) {
     countDown({
       seconds: 120,
       element: stepElementToDisplay,
-      callback: function () {
-        updateStape(0)
-      }
+      callback: () => updateStep(0)
     })
   }
 }
@@ -70,7 +66,7 @@ function countDown ({ seconds, element, callback = () => {} }) {
 
     if (remainingSeconds > 0) {
       requestAnimationFrame(updateCountdown)
-    } else if (typeof callback === 'function') {
+    } else {
       callback()
     }
   }
