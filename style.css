@@ -38,12 +38,6 @@ main p {
    Steps
    ------------------------------------------------------- */
 
-.step {
-  display: none;
-}
-
-body[data-active-step="0"] .step[data-step="0"],
-body[data-active-step="1"] .step[data-step="1"],
-body[data-active-step="2"] .step[data-step="2"] {
+.step:not([hidden]) {
   display: grid;
 }
