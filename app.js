@@ -3,6 +3,9 @@
 /** @type {number} */
 let activeStep = 0
 
+/** @type {HTMLAllCollection} */
+const stepsElements = document.querySelectorAll('.js-step')
+
 document.addEventListener('click', ({ target }) => {
   updateStape(activeStep + 1)
 })
@@ -13,7 +16,6 @@ document.addEventListener('click', ({ target }) => {
  */
 
 function updateStape (step) {
-  const stepsElements = document.querySelectorAll('.js-step')
   activeStep = step === stepsElements.length ? 0 : step
 
   const hiddenStep = document.querySelector('.js-step:not([hidden])')
