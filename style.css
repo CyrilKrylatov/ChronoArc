@@ -38,6 +38,7 @@ main {
   height: 100%;
   font-size: 6rem;
   font-weight: 700;
+  font-variant-numeric: tabular-nums;
 }
 
 .step:not([hidden]) {
