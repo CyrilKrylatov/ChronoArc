@@ -24,6 +24,8 @@ const updateStep = (step) => {
   const stepElementToDisplay = stepsElements[activeStep]
   stepElementToDisplay.hidden = false
 
+  updateThemeColor(THEME_COLOR[activeStep])
+
   if (activeStep === 1) {
     countDown({
       seconds: 10,
@@ -72,4 +74,24 @@ function countDown ({ seconds, element, callback = () => {} }) {
   }
 
   updateCountdown()
+}
+
+/**
+ * Updates the theme color in the meta tag with the given hexadecimal color value
+ * @param {string} hexColor
+ */
+
+function updateThemeColor (hexColor) {
+  document.querySelector('meta[name="theme-color"]').setAttribute('content', hexColor)
+}
+
+/**
+ * A mapping of step indices to their corresponding theme colors.
+ * @type {Record<number, string>}
+ */
+
+const THEME_COLOR = {
+  0: '#5599FE',
+  1: '#FFD351',
+  2: '#5EAB87'
 }
