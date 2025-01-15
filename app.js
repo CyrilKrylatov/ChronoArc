@@ -1,18 +1,29 @@
 /* global requestAnimationFrame */
 
 /** @type {number} */
-let activeStep = 0
+let ACTIVE_STEP = 0
 
 /** @type {NodeListOf<Element>} */
-const stepsElements = document.querySelectorAll('.js-step')
+const STEPS_ELEMENTS = document.querySelectorAll('.js-step')
 
-const audioElement = document.querySelector('.js-audio')
+const AUDIO_ELEMENT = document.querySelector('.js-audio')
 
 /** @type {number} */
-let countAudioPlayer = 1
+let CURRENT_PLAYER_COUNT = 1
+
+/**
+ * A mapping of step indices to their corresponding theme colors.
+ * @type {Record<number, string>}
+ */
+
+const THEME_COLOR = {
+  0: '#5599FE',
+  1: '#FFD351',
+  2: '#5EAB87'
+}
 
 document.addEventListener('click', ({ target }) => {
-  updateStep(activeStep + 1)
+  updateStep(ACTIVE_STEP + 1)
 })
 
 /**
@@ -21,18 +32,18 @@ document.addEventListener('click', ({ target }) => {
  * @param {number} step - The next step index to activate.
  */
 const updateStep = (step) => {
-  activeStep = step === stepsElements.length ? 0 : step
+  ACTIVE_STEP = step === STEPS_ELEMENTS.length ? 0 : step
 
   const hiddenStep = document.querySelector('.js-step:not([hidden])')
   hiddenStep.hidden = true
 
-  const stepElementToDisplay = stepsElements[activeStep]
+  const stepElementToDisplay = STEPS_ELEMENTS[ACTIVE_STEP]
   stepElementToDisplay.hidden = false
 
-  updateThemeColor(THEME_COLOR[activeStep])
+  updateThemeColor(THEME_COLOR[ACTIVE_STEP])
 
-  if (activeStep === 1) {
-    playAudio(2)
+  if (ACTIVE_STEP === 1) {
+    playAudioWithRepeats(2)
     countDown({
       seconds: 10,
       element: stepElementToDisplay,
@@ -40,14 +51,14 @@ const updateStep = (step) => {
     })
   }
 
-  if (activeStep === 2) {
-    playAudio(1)
+  if (ACTIVE_STEP === 2) {
+    playAudioWithRepeats(1)
     countDown({
       seconds: 120,
       element: stepElementToDisplay,
       callback: () => {
         updateStep(0)
-        playAudio(3)
+        playAudioWithRepeats(3)
       }
     })
   }
@@ -96,29 +107,18 @@ function updateThemeColor (hexColor) {
 }
 
 /**
- * A mapping of step indices to their corresponding theme colors.
- * @type {Record<number, string>}
- */
-
-const THEME_COLOR = {
-  0: '#5599FE',
-  1: '#FFD351',
-  2: '#5EAB87'
-}
-
-/**
  * Plays an audio file a specified number of times.
- * @param {number} loopCount - The number of times to play the audio.
+ * @param {number} repeatCount - The number of times to play the audio.
  */
 
-function playAudio (loopCount) {
-  audioElement.play()
-  audioElement.addEventListener('ended', () => {
-    if (countAudioPlayer < loopCount) {
-      countAudioPlayer = countAudioPlayer + 1
-      playAudio(loopCount)
+function playAudioWithRepeats (repeatCount) {
+  AUDIO_ELEMENT.play()
+  AUDIO_ELEMENT.addEventListener('ended', () => {
+    if (CURRENT_PLAYER_COUNT < repeatCount) {
+      CURRENT_PLAYER_COUNT = CURRENT_PLAYER_COUNT + 1
+      playAudioWithRepeats(repeatCount)
       return
     }
-    countAudioPlayer = 1
+    CURRENT_PLAYER_COUNT = 1
   }, { once: true })
 }
