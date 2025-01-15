@@ -6,6 +6,11 @@ let activeStep = 0
 /** @type {NodeListOf<Element>} */
 const stepsElements = document.querySelectorAll('.js-step')
 
+const audioElement = document.querySelector('.js-audio')
+
+/** @type {number} */
+let countAudioPlayer = 1
+
 document.addEventListener('click', ({ target }) => {
   updateStep(activeStep + 1)
 })
@@ -27,6 +32,7 @@ const updateStep = (step) => {
   updateThemeColor(THEME_COLOR[activeStep])
 
   if (activeStep === 1) {
+    playAudio(2)
     countDown({
       seconds: 10,
       element: stepElementToDisplay,
@@ -35,10 +41,14 @@ const updateStep = (step) => {
   }
 
   if (activeStep === 2) {
+    playAudio(1)
     countDown({
       seconds: 120,
       element: stepElementToDisplay,
-      callback: () => updateStep(0)
+      callback: () => {
+        updateStep(0)
+        playAudio(3)
+      }
     })
   }
 }
@@ -94,4 +104,21 @@ const THEME_COLOR = {
   0: '#5599FE',
   1: '#FFD351',
   2: '#5EAB87'
+}
+
+/**
+ * Plays an audio file a specified number of times.
+ * @param {number} loopCount - The number of times to play the audio.
+ */
+
+function playAudio (loopCount) {
+  audioElement.play()
+  audioElement.addEventListener('ended', () => {
+    if (countAudioPlayer < loopCount) {
+      countAudioPlayer = countAudioPlayer + 1
+      playAudio(loopCount)
+      return
+    }
+    countAudioPlayer = 1
+  }, { once: true })
 }
