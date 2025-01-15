@@ -98,12 +98,13 @@ function countDown ({ seconds, element, callback = () => {} }) {
 }
 
 /**
- * Updates the theme color in the meta tag with the given hexadecimal color value
+ * Updates the theme color  & body background's color with the given hexadecimal color value
  * @param {string} hexColor
  */
 
 function updateThemeColor (hexColor) {
   document.querySelector('meta[name="theme-color"]').setAttribute('content', hexColor)
+  document.body.style.backgroundColor = hexColor
 }
 
 /**
