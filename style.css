@@ -1,7 +1,3 @@
-/* ----------------------------------------------------------
-   Reset
-   ------------------------------------------------------- */
-
 body,
 html {
   margin: 0;
@@ -17,16 +13,16 @@ html {
    ------------------------------------------------------- */
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
   color: #000;
   background: #5599FE;
-  transition: color 100ms ease, background-color 100ms ease;
+  transition: color 100ms ease,background-color 100ms ease;
 }
 
 main {
-  user-select: none;
   height: 100vh;
   height: 100svh;
+  user-select: none;
 }
 
 /* ----------------------------------------------------------
@@ -34,12 +30,12 @@ main {
    ------------------------------------------------------- */
 
 .step {
-  color: #fff;
-  place-items: center;
-  margin: 0;
   height: 100%;
+  margin: 0;
   font-size: 6rem;
   font-weight: 700;
+  color: #fff;
+  place-items: center;
   font-variant-numeric: tabular-nums;
 }
 
@@ -60,16 +56,16 @@ main {
    ------------------------------------------------------- */
 
 input {
-  background: transparent;
+  -moz-appearance: textfield;
+  width: 3ch;
+  max-width: 100%;
   border: none;
   text-align: center;
-  color: inherit;
   font-size: inherit;
   font-weight: inherit;
+  color: inherit;
+  background: transparent;
   font-variant-numeric: inherit;
-  max-width: 100%;
-  width: 3ch;
-  -moz-appearance:textfield;
 }
 
 input::-webkit-outer-spin-button,
@@ -86,7 +82,6 @@ footer {
   padding: .5rem;
   text-align: center;
 }
-
 
 footer p {
   margin: 0;
