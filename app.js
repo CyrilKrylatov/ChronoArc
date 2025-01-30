@@ -5,11 +5,15 @@ let ACTIVE_STEP = 0
 
 /** @type {NodeListOf<Element>} */
 const STEPS_ELEMENTS = document.querySelectorAll('.js-step')
-
 const AUDIO_ELEMENT = document.querySelector('.js-audio')
+const INPUT_ELEMENT = document.querySelector('.js-input')
+const FINALSTEP_ELEMENT = document.querySelector('.js-timer')
 
 /** @type {number} */
 let CURRENT_PLAYER_COUNT = 1
+
+/** @type {number} */
+let TIMER_VALUE = Number(INPUT_ELEMENT.value)
 
 /**
  * A mapping of step indices to their corresponding theme colors.
@@ -23,7 +27,15 @@ const THEME_COLOR = {
 }
 
 document.addEventListener('click', ({ target }) => {
+  if (target.tagName.toLowerCase() === 'input') {
+    return
+  }
   updateStep(ACTIVE_STEP + 1)
+})
+
+INPUT_ELEMENT.addEventListener('blur', ({ target }) => {
+  TIMER_VALUE = Number(target.value)
+  FINALSTEP_ELEMENT.textContent = TIMER_VALUE
 })
 
 /**
@@ -54,7 +66,7 @@ const updateStep = (step) => {
   if (ACTIVE_STEP === 2) {
     playAudioWithRepeats(1)
     countDown({
-      seconds: 120,
+      seconds: TIMER_VALUE,
       element: stepElementToDisplay,
       callback: () => {
         updateStep(0)
