@@ -1,5 +1,5 @@
-# chronotir
-Web application from Chronotir
+# ChronoArc
+Web application from ChronoArc
 
 <img src="apple-touch-icon.png" alt="" style="border-radius: 17.544%" />
 
