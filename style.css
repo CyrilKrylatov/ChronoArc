@@ -51,6 +51,12 @@ main {
   display: grid;
 }
 
+.step:not(.step--0) {
+  font-size: 7rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
 .step.step--1 {
   color: #000;
 }
