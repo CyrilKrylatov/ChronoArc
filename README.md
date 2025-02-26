@@ -1,8 +1,8 @@
 # ChronoArc
-Web application from ChronoArc
+Un simple chrono pour le tir à l'arc.
 
 <img src="apple-touch-icon.png" alt="" style="border-radius: 17.544%" />
 
-Logo made with ❤️ by [Johanne B](https://joanmylie.com/).
+Logo fabriqué avec ❤️ par [Johanne B](https://joanmylie.com/).
 
-UX review made with ❤️ by [Maxime B](https://fr.linkedin.com/in/maximeblaise).
+Retours UX exprimés avec ❤️ par [Maxime B](https://fr.linkedin.com/in/maximeblaise).
