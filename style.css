@@ -1,3 +1,14 @@
+:root {
+  box-sizing: border-box;
+  --transition-delay: 200ms;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
 body,
 html {
   margin: 0;
@@ -32,11 +43,8 @@ main {
 .step {
   height: 100%;
   margin: 0;
-  font-size: 6rem;
-  font-weight: 700;
   color: #fff;
   place-items: center;
-  font-variant-numeric: tabular-nums;
 }
 
 .step:not([hidden]) {
@@ -52,26 +60,80 @@ main {
 }
 
 /* ----------------------------------------------------------
-   Input
+   Form
    ------------------------------------------------------- */
 
-input {
-  -moz-appearance: textfield;
-  width: 3ch;
-  max-width: 100%;
+fieldset {
+  margin: 0;
+  padding-right: 0;
+  padding-left: 0;
   border: none;
-  text-align: center;
-  font-size: inherit;
-  font-weight: inherit;
-  color: inherit;
-  background: transparent;
-  font-variant-numeric: inherit;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  margin-top: auto;
+  margin-bottom: 30px;
+  padding: 0 30px;
+}
+
+.labels {
+  display: grid;
+  grid-auto-flow: column;
+  column-gap: 10px;
+}
+
+.label-wrapper {
+  min-width: 48px;
+  font-variant-numeric: tabular-nums;
+}
+
+label {
+  display: block;
+  padding: 14px 5px;
+  border: 1px currentColor solid;
+  border-radius: 15px;
+  text-align: center;
+  transition: color var(--transition-delay) ease,border-color var(--transition-delay) ease,background-color var(--transition-delay) ease;
+  cursor: pointer;
+}
+
+label input {
+  visibility: hidden;
+  position: absolute;
+}
+
+label:hover,
+label:has(input:checked) {
+  color: #000;
+}
+
+label:has(input:checked) {
+  background: rgba(255, 255, 255, .5);
+}
+
+.label-subtotal {
+  margin-top: 5px;
+  font-size: .8rem;
+  font-style: italic;
+}
+
+form button {
+  padding: 10px 5px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  color: #fff;
+  background: #447acb;
+  transition: background-color var(--transition-delay) ease;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #3b6bb2;
 }
 
 /* ----------------------------------------------------------

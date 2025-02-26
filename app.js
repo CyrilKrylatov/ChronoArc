@@ -5,15 +5,16 @@ let ACTIVE_STEP = 0
 
 /** @type {NodeListOf<Element>} */
 const STEPS_ELEMENTS = document.querySelectorAll('.js-step')
+const SUBTOTAL_ELEMENTS = document.querySelectorAll('.js-subtotal')
 const AUDIO_ELEMENT = document.querySelector('.js-audio')
-const INPUT_ELEMENT = document.querySelector('.js-input')
 const FINALSTEP_ELEMENT = document.querySelector('.js-timer')
+const FORM_ELEMENT = document.querySelector('.js-form')
 
 /** @type {number} */
 let CURRENT_PLAYER_COUNT = 1
 
 /** @type {number} */
-let TIMER_VALUE = Number(INPUT_ELEMENT.value)
+let TIMER_VALUE = 120
 
 /**
  * A mapping of step indices to their corresponding theme colors.
@@ -27,15 +28,27 @@ const THEME_COLOR = {
 }
 
 document.addEventListener('click', ({ target }) => {
-  if (target.tagName.toLowerCase() === 'input') {
+  if (target.closest('form')) {
     return
   }
   updateStep(ACTIVE_STEP + 1)
 })
 
-INPUT_ELEMENT.addEventListener('blur', ({ target }) => {
-  TIMER_VALUE = Number(target.value)
+FORM_ELEMENT.addEventListener('change', (event) => {
+  const data = new FormData(event.currentTarget)
+  const defaultTimer = Number(data.get('default'))
+  const handicapTimer = Number(data.get('handicap'))
+  TIMER_VALUE = defaultTimer - handicapTimer
   FINALSTEP_ELEMENT.textContent = TIMER_VALUE
+
+  SUBTOTAL_ELEMENTS.forEach(element => {
+    const inputElement = element.closest('.js-label-wrapper').querySelector('input')
+    if (!inputElement) {
+      return
+    }
+    const handicapValue = Number(inputElement.value)
+    element.textContent = defaultTimer - handicapValue
+  })
 })
 
 /**

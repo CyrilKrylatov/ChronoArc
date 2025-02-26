@@ -17,9 +17,64 @@
 
 <body>
     <main class="js-main">
-        <p class="step step--0 js-step">
-            <input aria-label="Choose a length for the timer" type="number" inputmode="decimal" class="js-input" value="120">
-        </p>
+        <div class="step step--0 js-step">
+            <form class="js-form">
+                <fieldset>
+                    <legend>Temps par défaut</legend>
+                    <div class="labels">
+                        <label>
+                            120s
+                            <input type="radio" name="default" value="120" checked>
+                        </label>
+                        <label>
+                            80s
+                            <input type="radio" name="default" value="80">
+                        </label>
+                        <label>
+                            60s
+                            <input type="radio" name="default" value="60">
+                        </label>
+                        <label>
+                            40s
+                            <input type="radio" name="default" value="40">
+                        </label>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Handicap</legend>
+                    <div class="labels">
+                        <div class="label-wrapper js-label-wrapper">
+                            <label>
+                                0s <input type="radio" name="handicap" value="0" checked>
+                            </label>
+                            <div class="label-subtotal">Total : <span class="js-subtotal">120</span>s</div>
+                        </div>
+                        <div class="label-wrapper js-label-wrapper">
+                            <label>
+                                -10s
+                                <input type="radio" name="handicap" value="10">
+                            </label>
+                            <div class="label-subtotal">Total : <span class="js-subtotal">110</span>s</div>
+                        </div>
+                        <div class="label-wrapper js-label-wrapper">
+                            <label>
+                                -15s
+                                <input type="radio" name="handicap" value="15">
+                            </label>
+                            <div class="label-subtotal">Total : <span class="js-subtotal">105</span>s</div>
+                        </div>
+                        <div class="label-wrapper js-label-wrapper">
+                            <label>
+                                -20s
+                                <input type="radio" name="handicap" value="20">
+                            </label>
+                            <div class="label-subtotal">Total : <span class="js-subtotal">100</span>s</div>
+                        </div>
+                    </div>
+                </fieldset>
+                <button type="button">Lancer le chrono</button>
+            </form>
+        </div>
         <p class="step step--1 js-step" hidden>10</p>
         <p class="step step--2 js-step js-timer" hidden>120</p>
     </main>
