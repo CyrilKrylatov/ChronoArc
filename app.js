@@ -1,7 +1,8 @@
-/* global requestAnimationFrame */
-
 /** @type {number} */
 let ACTIVE_STEP = 0
+
+/** @type {number} */
+let INTERVAL_ID = 0
 
 /** @type {NodeListOf<Element>} */
 const STEPS_ELEMENTS = document.querySelectorAll('.js-step')
@@ -53,7 +54,6 @@ FORM_ELEMENT.addEventListener('change', (event) => {
 
 /**
  * Updates the active step state and handles the display of steps.
- *
  * @param {number} step - The next step index to activate.
  */
 const updateStep = (step) => {
@@ -66,6 +66,10 @@ const updateStep = (step) => {
   stepElementToDisplay.hidden = false
 
   updateThemeColor(THEME_COLOR[ACTIVE_STEP])
+
+  if (ACTIVE_STEP === 0) {
+    clearInterval(INTERVAL_ID)
+  }
 
   if (ACTIVE_STEP === 1) {
     playAudioWithRepeats(2)
@@ -92,9 +96,9 @@ const updateStep = (step) => {
 /**
  * Creates a countdown timer that updates the text content of a given element
  * with the remaining seconds. Executes a callback function when the timer
- * reaches zero. Uses requestAnimationFrame for better performance and accuracy.
+ * reaches zero. Uses setInterval for time management.
  *
- * @param {Object} options
+ * @param {Object} options - Configuration object for the countdown timer.
  * @param {number} options.seconds - The number of seconds for the countdown.
  * @param {HTMLElement} options.element - The HTML element to display the countdown.
  * @param {Function} options.callback - The function to execute when the countdown ends.
@@ -104,22 +108,21 @@ function countDown ({ seconds, element, callback = () => {} }) {
     return
   }
 
-  const endTime = Date.now() + seconds * 1000
+  // Clear any existing interval to prevent multiple timers running simultaneously
+  clearInterval(INTERVAL_ID)
 
-  function updateCountdown () {
-    const now = Date.now()
-    const remainingSeconds = Math.max(0, Math.round((endTime - now) / 1000))
+  let remainingSeconds = seconds
+  element.textContent = remainingSeconds
 
+  INTERVAL_ID = setInterval(() => {
+    remainingSeconds -= 1
     element.textContent = remainingSeconds
 
-    if (remainingSeconds > 0) {
-      requestAnimationFrame(updateCountdown)
-    } else {
+    if (remainingSeconds <= 0) {
+      clearInterval(INTERVAL_ID)
       callback()
     }
-  }
-
-  updateCountdown()
+  }, 1000)
 }
 
 /**
