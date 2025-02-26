@@ -6,10 +6,12 @@ let INTERVAL_ID = 0
 
 /** @type {NodeListOf<Element>} */
 const STEPS_ELEMENTS = document.querySelectorAll('.js-step')
+const CLICKS_ELEMENT = [STEPS_ELEMENTS[1], STEPS_ELEMENTS[2]]
 const SUBTOTAL_ELEMENTS = document.querySelectorAll('.js-subtotal')
 const AUDIO_ELEMENT = document.querySelector('.js-audio')
 const FINALSTEP_ELEMENT = document.querySelector('.js-timer')
 const FORM_ELEMENT = document.querySelector('.js-form')
+const BUTTON_ELEMENT = document.querySelector('.js-launch-button')
 
 /** @type {number} */
 let CURRENT_PLAYER_COUNT = 1
@@ -28,11 +30,14 @@ const THEME_COLOR = {
   2: '#5EAB87'
 }
 
-document.addEventListener('click', ({ target }) => {
-  if (target.closest('form')) {
-    return
-  }
-  updateStep(ACTIVE_STEP + 1)
+CLICKS_ELEMENT.forEach(element => {
+  element.addEventListener('click', () => {
+    updateStep(ACTIVE_STEP + 1)
+  })
+})
+
+BUTTON_ELEMENT.addEventListener('click', () => {
+  updateStep(1)
 })
 
 FORM_ELEMENT.addEventListener('change', (event) => {
